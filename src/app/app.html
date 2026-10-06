@@ -1,0 +1,51 @@
+<header class="cabecera">
+  <a class="logo" routerLink="/" aria-label="PISTON, inicio">
+    piston<span>®</span>
+  </a>
+
+  <span class="cabecera-texto">
+    REPUESTOS.<br>
+    SIN RODEOS.
+  </span>
+
+  <nav aria-label="Menú principal">
+    <a
+      routerLink="/"
+      routerLinkActive="activo"
+      [routerLinkActiveOptions]="{ exact: true }"
+      ariaCurrentWhenActive="page"
+    >
+      <span class="numero">01</span>
+      INICIO
+      <span class="flecha" aria-hidden="true">↗</span>
+    </a>
+
+    <a
+      routerLink="/verInsert"
+      routerLinkActive="activo"
+      ariaCurrentWhenActive="page"
+    >
+      <span class="numero">02</span>
+      INSERTAR
+      <span class="flecha" aria-hidden="true">↗</span>
+    </a>
+
+    <a
+      routerLink="/verFiltro"
+      routerLinkActive="activo"
+      ariaCurrentWhenActive="page"
+    >
+      <span class="numero">03</span>
+      BUSCAR
+      <span class="flecha" aria-hidden="true">↗</span>
+    </a>
+  </nav>
+</header>
+
+<router-outlet></router-outlet>
+
+<footer class="pie">
+  <a class="logo" routerLink="/">piston<span>®</span></a>
+  <p>La pieza que necesitas. Para el coche que tienes.</p>
+  <small>Tienda ficticia · Proyecto académico</small>
+</footer>

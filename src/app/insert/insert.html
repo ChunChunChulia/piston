@@ -1,0 +1,150 @@
+<main class="insertar">
+  <header class="introduccion">
+    <p class="etiqueta">PISTON® / GESTIÓN DE REPUESTOS</p>
+
+    <div class="introduccion-fila">
+      <h1>NUEVA <span>PIEZA.</span></h1>
+
+      <p class="descripcion">
+        Amplía el catálogo.<br>
+        Cada pieza empieza con sus datos.
+      </p>
+    </div>
+  </header>
+
+  <div class="zona-formulario">
+    <img
+      class="panel-imagen"
+      src="imagenes/piezas-desguace-coche-no-recambio.jpg"
+      alt=""
+      aria-hidden="true"
+    >
+
+    <aside class="panel">
+      <div class="panel-contenido">
+        <span class="panel-numero">01 / ALTA DE REPUESTO</span>
+
+        <h2>
+          EL SIGUIENTE<br>
+          KILÓMETRO<br>
+          EMPIEZA AQUÍ.
+        </h2>
+
+        <p>
+          Selecciona una marca existente y completa
+          la información de la pieza.
+        </p>
+
+        <span class="panel-flecha" aria-hidden="true">↗</span>
+      </div>
+    </aside>
+
+    <form
+      class="formulario"
+      #formularioPieza="ngForm"
+      (ngSubmit)="guardarPieza(formularioPieza)"
+      [attr.aria-busy]="guardando"
+    >
+      <div class="formulario-cabecera">
+        <h2>Datos de la pieza</h2>
+        <p>Todos los campos son obligatorios.</p>
+      </div>
+
+      <div class="campo">
+        <label for="marca">01 / MARCA *</label>
+
+        <select
+          id="marca"
+          name="marca"
+          [(ngModel)]="pieza.marca"
+          [disabled]="cargandoMarcas || guardando"
+          aria-describedby="ayuda-marca"
+          required
+        >
+          <option [ngValue]="null" disabled>
+            {{ cargandoMarcas ? 'Cargando marcas...' : 'Selecciona una marca' }}
+          </option>
+
+          @for (marca of marcas; track marca.id_mar) {
+            <option [ngValue]="marca.id_mar">
+              {{ marca.nom_mar }}
+            </option>
+          }
+        </select>
+
+        <p class="ayuda" id="ayuda-marca">
+          Selecciona una marca registrada en el catálogo.
+        </p>
+      </div>
+
+      <div class="campo">
+        <label for="nombre">02 / NOMBRE DE LA PIEZA *</label>
+
+        <input
+          id="nombre"
+          name="nombre"
+          type="text"
+          [(ngModel)]="pieza.nombre"
+          [readonly]="guardando"
+          placeholder="Ej. Filtro de aceite"
+          required
+        >
+      </div>
+
+      <div class="campo">
+        <label for="precio">03 / PRECIO *</label>
+
+        <div class="entrada-precio">
+          <input
+            id="precio"
+            name="precio"
+            type="number"
+            [(ngModel)]="pieza.precio"
+            [readonly]="guardando"
+            min="0"
+            step="0.01"
+            placeholder="0,00"
+            required
+          >
+          <span aria-hidden="true">€</span>
+        </div>
+      </div>
+
+      @if (mensaje) {
+        <p class="mensaje-exito" role="status">
+          {{ mensaje }}
+        </p>
+      }
+
+      @if (error) {
+        <p class="mensaje-error" role="alert">
+          {{ error }}
+        </p>
+      }
+
+      <div class="acciones">
+        <p>Revisa los datos antes de guardar.</p>
+
+        <button
+          class="boton-guardar"
+          type="submit"
+          [disabled]="
+            formularioPieza.invalid ||
+            guardando ||
+            cargandoMarcas ||
+            marcas.length === 0 ||
+            pieza.nombre.trim() === ''
+          "
+        >
+          {{ guardando ? 'GUARDANDO...' : 'GUARDAR PIEZA' }}
+          <span aria-hidden="true">↗</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <footer class="cierre">
+    <span>BUENAS PIEZAS. MUCHOS KILÓMETROS.</span>
+    <span aria-hidden="true">✳</span>
+  </footer>
+</main>

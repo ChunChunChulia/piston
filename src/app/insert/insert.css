@@ -1,0 +1,354 @@
+:host {
+  display: block;
+  background: #f2f0e9;
+  color: #191919;
+  font-family: Arial, Helvetica, sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+input,
+select,
+button {
+  font: inherit;
+}
+
+/* Título compacto */
+.introduccion {
+  padding: 20px 5%;
+  border-bottom: 3px solid #191919;
+}
+.etiqueta {
+  margin: 0 0 12px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 2px;
+}
+.introduccion-fila {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 30px;
+}
+h1 {
+  margin: 0;
+  font-family: "Arial Black", Arial, Helvetica, sans-serif;
+  font-size: clamp(42px, 5vw, 72px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.075em;
+}
+h1 span {
+  color: #d63d10;
+}
+.descripcion {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Fondo fotográfico */
+.zona-formulario {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr);
+  gap: 40px;
+  overflow: hidden;
+  padding: 25px 5%;
+  background: #191919;
+  color: #f2f0e9;
+}
+.panel-imagen {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+}
+.zona-formulario::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  pointer-events: none;
+}
+
+/* Texto sobre la fotografía */
+.panel {
+  min-width: 0;
+}
+.panel-contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 100%;
+  padding-block: 10px;
+}
+.panel-numero {
+  padding: 8px 10px;
+  background: #ff632e;
+  color: #191919;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 1.5px;
+}
+.panel h2 {
+  margin: 30px 0 25px;
+  font-size: clamp(28px, 3.5vw, 50px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.055em;
+}
+.panel p {
+  max-width: 280px;
+  margin: 0;
+  color: #e0ddd5;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.panel-flecha {
+  margin-top: auto;
+  padding-top: 20px;
+  color: #ff632e;
+  font-size: 80px;
+  line-height: 1;
+}
+
+/* Formulario oscuro */
+.formulario {
+  min-width: 0;
+  padding: 30px;
+  border: 2px solid #f2f0e9;
+  background: rgba(25, 25, 25, 0.94);
+  box-shadow: 10px 10px 0 #ff632e;
+}
+.formulario-cabecera {
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid #66645e;
+}
+.formulario-cabecera h2 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  letter-spacing: -1px;
+}
+.formulario-cabecera p {
+  margin: 0;
+  color: #c7c4bb;
+  font-size: 12px;
+}
+
+/* Campos */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  margin-bottom: 22px;
+}
+label {
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1.5;
+  letter-spacing: 1px;
+}
+input,
+select {
+  width: 100%;
+  min-width: 0;
+  height: 52px;
+  padding: 0 16px;
+  border: 2px solid #8d8a81;
+  border-radius: 0;
+  background: #252525;
+  color: #f2f0e9;
+  font-size: 16px;
+  color-scheme: dark;
+}
+select {
+  cursor: pointer;
+}
+input::placeholder {
+  color: #aaa79e;
+}
+input:hover,
+select:hover {
+  background: #303030;
+}
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #ff632e;
+  outline-offset: 3px;
+}
+select:disabled {
+  cursor: wait;
+}
+.ayuda {
+  margin: 0;
+  color: #c7c4bb;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.entrada-precio {
+  position: relative;
+}
+.entrada-precio input {
+  padding-right: 60px;
+}
+.entrada-precio span {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 48px;
+  border-left: 2px solid #8d8a81;
+  background: #ff632e;
+  color: #191919;
+  font-weight: 900;
+  pointer-events: none;
+}
+
+/* Mensajes de la API */
+.mensaje-exito,
+.mensaje-error {
+  margin: 0 0 20px;
+  padding: 14px;
+  border: 2px solid;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.mensaje-exito {
+  border-color: #9be0ac;
+  color: #9be0ac;
+}
+.mensaje-error {
+  border-color: #ffb09a;
+  color: #ffb09a;
+}
+
+/* Botón */
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 20px;
+  border-top: 2px solid #66645e;
+}
+.acciones p {
+  margin: 0;
+  color: #c7c4bb;
+  font-size: 12px;
+}
+.boton-guardar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+  min-height: 52px;
+  padding: 12px 22px;
+  border: 2px solid #ff632e;
+  border-radius: 0;
+  background: #ff632e;
+  color: #191919;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+.boton-guardar span {
+  font-size: 26px;
+  line-height: 1;
+  transition: transform 180ms ease;
+}
+.boton-guardar:hover:not(:disabled) {
+  border-color: #f2f0e9;
+  background: #f2f0e9;
+}
+.boton-guardar:hover:not(:disabled) span,
+.boton-guardar:focus-visible span {
+  transform: translate(3px, -3px);
+}
+.boton-guardar:focus-visible {
+  outline: 3px solid #ff632e;
+  outline-offset: 4px;
+}
+.boton-guardar:disabled {
+  border-color: #666;
+  background: #333;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+/* Cierre */
+.cierre {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  padding: 25px 5%;
+  border-top: 3px solid #191919;
+  font-size: clamp(16px, 2.5vw, 35px);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+.cierre span:last-child {
+  color: #d63d10;
+  font-size: 45px;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .zona-formulario {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+    gap: 25px;
+  }
+  .panel h2 {
+    font-size: 30px;
+  }
+}
+
+/* Móvil */
+@media (max-width: 600px) {
+  .introduccion-fila {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  h1 {
+    font-size: 42px;
+  }
+  .zona-formulario {
+    grid-template-columns: 1fr;
+    padding-block: 25px 35px;
+  }
+  .panel {
+    display: none;
+  }
+  .formulario {
+    padding: 24px 18px;
+    box-shadow: 6px 6px 0 #ff632e;
+  }
+  .acciones {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .boton-guardar {
+    width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .boton-guardar span {
+    transition: none;
+    transform: none;
+  }
+}

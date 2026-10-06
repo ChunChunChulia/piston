@@ -1,0 +1,160 @@
+<main class="buscar">
+  <header class="introduccion">
+    <p class="etiqueta">PISTON® / CATÁLOGO DE REPUESTOS</p>
+
+    <div class="introduccion-fila">
+      <h1>BUSCA TU <span>PIEZA.</span></h1>
+
+      <p class="descripcion">
+        Elige una marca.<br>
+        Encuentra tu próximo recambio.
+      </p>
+    </div>
+  </header>
+
+  <section class="catalogo" aria-label="Buscar recambios">
+        <img
+            class="catalogo-imagen"
+            src="imagenes/piezas-segunda-mano-coches-perez.jpg"
+            alt=""
+            aria-hidden="true"
+        >
+    <div class="barra-filtros">
+      <div class="campo-marca">
+        <label for="marca">01 / FILTRAR POR MARCA</label>
+
+        <select
+          id="marca"
+          name="marca"
+          [(ngModel)]="marcaSeleccionada"
+          (ngModelChange)="buscarRecambios()"
+          [disabled]="cargandoMarcas || marcas.length === 0"
+        >
+          <option [ngValue]="null">
+            {{ cargandoMarcas ? 'Cargando marcas...' : 'Todas las marcas' }}
+          </option>
+
+          @for (marca of marcas; track marca.id_mar) {
+            <option [ngValue]="marca.id_mar">
+              {{ marca.nom_mar }}
+            </option>
+          }
+        </select>
+      </div>
+
+      <button
+        class="boton-todos"
+        type="button"
+        (click)="mostrarTodos()"
+        [disabled]="marcaSeleccionada === null"
+      >
+        MOSTRAR TODOS
+        <span aria-hidden="true">↗</span>
+      </button>
+
+      <span class="filtros-texto" aria-hidden="true">
+        LA PIEZA.<br>
+        Y A RODAR.
+      </span>
+    </div>
+
+    @if (errorMarcas) {
+      <p class="mensaje-error" role="alert">
+        {{ errorMarcas }}
+      </p>
+    }
+
+    <section
+      class="resultados"
+      aria-labelledby="titulo-resultados"
+      [attr.aria-busy]="cargandoRecambios"
+    >
+      <div class="resultados-cabecera">
+        <h2 id="titulo-resultados">Recambios disponibles</h2>
+
+        <p class="contador" role="status">
+          @if (cargandoRecambios) {
+            CARGANDO…
+          } @else if (errorRecambios) {
+            CONSULTA NO DISPONIBLE
+          } @else {
+            {{ recambios.length }}
+            {{ recambios.length === 1 ? 'RESULTADO' : 'RESULTADOS' }}
+          }
+        </p>
+      </div>
+
+      @if (errorRecambios) {
+        <div class="estado">
+          <p class="mensaje-error" role="alert">
+            {{ errorRecambios }}
+          </p>
+
+          <button
+            class="boton-todos"
+            type="button"
+            (click)="buscarRecambios()"
+          >
+            REINTENTAR ↗
+          </button>
+        </div>
+      } @else {
+        <div
+          class="tabla-contenedor"
+          tabindex="0"
+          role="region"
+          aria-label="Tabla de recambios, desplazable horizontalmente"
+        >
+          <table>
+            <caption class="solo-lectores">
+              Recambios y precios según la marca seleccionada
+            </caption>
+
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">MARCA</th>
+                <th scope="col">PIEZA</th>
+                <th scope="col" class="precio">PRECIO</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @if (cargandoRecambios) {
+                <tr>
+                  <td colspan="4" class="estado-tabla">
+                    Consultando el catálogo…
+                  </td>
+                </tr>
+              } @else {
+                @for (recambio of recambios; track recambio.id_rec) {
+                  <tr>
+                    <td class="identificador">{{ recambio.id_rec }}</td>
+                    <td>
+                      <span class="marca">{{ recambio.nom_mar }}</span>
+                    </td>
+                    <td class="nombre">{{ recambio.nom_rec }}</td>
+                    <td class="precio">
+                      {{ recambio.precio_rec | number:'1.2-2' }} €
+                    </td>
+                  </tr>
+                } @empty {
+                  <tr>
+                    <td colspan="4" class="estado-tabla">
+                      No hay recambios para esta selección.
+                    </td>
+                  </tr>
+                }
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </section>
+  </section>
+
+  <footer class="cierre">
+    <span>MENOS VUELTAS. MÁS KILÓMETROS.</span>
+    <span aria-hidden="true">↗</span>
+  </footer>
+</main>
